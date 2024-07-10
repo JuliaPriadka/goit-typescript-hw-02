@@ -1,6 +1,8 @@
+import { FC } from 'react';
 import css from './ImageCard.module.css';
+import { ImageCardTypes } from './ImageCard.types';
 
-export default function ImageCard({ picture, openModal }) {
+const ImageCard: FC<ImageCardTypes> = ({ picture, openModal }) => {
   return (
     <div className={css.galleryItem}>
       <img
@@ -11,4 +13,6 @@ export default function ImageCard({ picture, openModal }) {
       />
     </div>
   );
-}
+};
+
+export default ImageCard;

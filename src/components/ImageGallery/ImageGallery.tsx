@@ -1,7 +1,9 @@
+import { FC } from 'react';
 import ImageCard from '../ImageCard/ImageCard';
 import css from './ImageGallery.module.css';
+import { ImageGalleryTypes } from './ImageGallery.types';
 
-export default function ImageGallery({ pictures, openModal }) {
+const ImageGallery: FC<ImageGalleryTypes> = ({ pictures, openModal }) => {
   return (
     <ul className={css.gallery}>
       {pictures.map(picture => (
@@ -11,4 +13,6 @@ export default function ImageGallery({ pictures, openModal }) {
       ))}
     </ul>
   );
-}
+};
+
+export default ImageGallery;

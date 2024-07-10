@@ -1,7 +1,14 @@
 import Modal from 'react-modal';
 import css from './ImageModal.module.css';
+import { FC } from 'react';
+import { ImageModalTypes } from './ImageModal.types';
 
-export default function ImageModal({ onRequestClose, isOpen, fullSrc, alt }) {
+const ImageModal: FC<ImageModalTypes> = ({
+  onRequestClose,
+  isOpen,
+  fullSrc,
+  alt,
+}) => {
   return (
     <Modal
       onRequestClose={onRequestClose}
@@ -26,4 +33,6 @@ export default function ImageModal({ onRequestClose, isOpen, fullSrc, alt }) {
       <img src={fullSrc} alt={alt} className={css.modalImg} />
     </Modal>
   );
-}
+};
+
+export default ImageModal;

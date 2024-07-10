@@ -7,16 +7,17 @@ import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
 import SearchBar from './components/SearchBar/SearchBar';
 import ImageModal from './components/ImageModal/ImageModal';
+import { Results } from './types';
 
 function App() {
-  const [newData, setNewData] = useState([]);
-  const [loader, setLoader] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(false);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState('');
-  const [showBtn, setShowBtn] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalImage, setModalImage] = useState(null);
+  const [newData, setNewData] = useState<Results[]>([]);
+  const [loader, setLoader] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>('');
+  const [showBtn, setShowBtn] = useState<boolean | 0>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalImage, setModalImage] = useState<Results | null>(null);
 
   useEffect(() => {
     async function getPictures() {
@@ -39,22 +40,22 @@ function App() {
     getPictures();
   }, [query, page]);
 
-  function handleSearch(searchQuery) {
+  function handleSearch(searchQuery: string): void {
     setNewData([]);
     setQuery(searchQuery);
     setPage(1);
   }
 
-  function onLoadMoreBtnClick() {
+  function onLoadMoreBtnClick(): void {
     setPage(page + 1);
   }
 
-  function openModal(image) {
+  function openModal(image: Results): void {
     setModalImage(image);
     setIsModalOpen(true);
   }
 
-  function closeModal() {
+  function closeModal(): void {
     setModalImage(null);
     setIsModalOpen(false);
   }
@@ -71,7 +72,7 @@ function App() {
         <MagnifyingGlass color="rgb(24, 24, 147)" glassColor="yellow" />
       )}
       {showBtn && <LoadMoreBtn onLoadMoreBtnClick={onLoadMoreBtnClick} />}
-      {isModalOpen && (
+      {isModalOpen && modalImage !== null && (
         <ImageModal
           onRequestClose={closeModal}
           isOpen={isModalOpen}
